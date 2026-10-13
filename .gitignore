@@ -1,0 +1,38 @@
+# Dependencies
+node_modules/
+
+# Build output
+dist/
+build/
+
+# Wrangler / Cloudflare local state
+.wrangler/
+.dev.vars
+.dev.vars.*
+!.dev.vars.example
+wrangler.local.toml
+
+# Local secrets and key material — never commit
+*.key
+*.pem
+*token*.txt
+*secret*
+hub-*-key.json
+.config/
+
+# Logs and runtime state
+*.log
+logs/
+tmp/
+temp/
+
+# Editor / OS noise
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.swp
+
+# Test / verification scratch
+verify/scratch/
+*.local.json

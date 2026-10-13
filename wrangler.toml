@@ -1,0 +1,24 @@
+name = "db-collab-hub"
+main = "src/index.ts"
+compatibility_date = "2026-10-01"
+workers_dev = true
+
+# ISOLATION (plan §3): this Worker's COMPLETE binding list is DB + KV + AI.
+# No CLOUDFLARE_API_TOKEN, no QC_SECRET, no Access service tokens, no service
+# bindings, no secrets at all in Slice 1. Do not add bindings without
+# re-reading cloudflare-migration/mcp-hub-phase2-plan.md §3.
+
+[[d1_databases]]
+binding = "DB"
+database_name = "db-collab-hub-db"
+database_id = "64c1f19d-52cf-4c87-8b86-2c9309a00d80"
+
+[[kv_namespaces]]
+binding = "KV"
+id = "4e0c2d232a1f4bca93647e3161e2d279"
+
+[ai]
+binding = "AI"
+# AI binding: the Slice 2 moderation judge runs in-Worker via this
+# binding (pinned @cf/meta/llama-3.1-8b-instruct-fp8). The hub never
+# calls any external judge Worker and holds no QC_SECRET.
