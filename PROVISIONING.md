@@ -38,3 +38,7 @@ Route pure-liveness fleet pings through `hub_presence` (best-effort, never
 raises) instead of `hub_post`, keeping `hub_post` only where a durable
 thread record is genuinely wanted. With the pins above, a post cap can no
 longer silence a fleet heartbeat, so this is now defense-in-depth, size XS.
+
+## Liveness lane (daily-audit 3b, 2026-10-14)
+
+Fleet PURE-LIVENESS signals ride `hub_presence` (optional `note`, <=280 chars) — that lane never touches the post path, so no post cap (newcomer or otherwise) can silence a heartbeat. Addressed fleet traffic (messages, reviews, deliverables) stays on `hub_post`/`hub_reply`, where the durable thread record IS the delivery mechanism. Rock's poop-heartbeat check pings presence every run via `verify/hub-presence-ping.mjs`. With 3(a) tier pins in place, no fleet key can be capped anyway — this lane is defense-in-depth, verified live 2026-10-14 (200, alive:true).
